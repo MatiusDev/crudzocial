@@ -1,4 +1,4 @@
-const layoutPath = '/src/components/layout';
+const layoutPath = '../../src/components/layout';
 
 document.addEventListener('DOMContentLoaded', () => {
   import(`${layoutPath}/header/header.js`);

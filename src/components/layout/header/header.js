@@ -7,13 +7,13 @@ headerTemplate.innerHTML = `
     <nav class="navbar">
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="/src/pages/gallery/gallery.html">Galería</a>
-          <a class="navbar-item" href="/src/pages/notes/notes.html">Notas</a>
-          <a class="navbar-item" href="/src/pages/admin/admin.html">Panel de administración</a>
+          <a class="navbar-item" href="../../../pages/gallery/gallery.html">Galería</a>
+          <a class="navbar-item" href="../../../pages/notes/notes.html">Notas</a>
+          <a class="navbar-item" href="../../../pages/admin/admin.html">Panel de administración</a>
         </div>
         <div class="navbar-end">
             <p id="user-name"></p>
-            <a class="navbar-item" href="/src/pages/profile/profile.html">Perfil</a>
+            <a class="navbar-item" href="../../../pages/profile/profile.html">Perfil</a>
             <div class="navbar-item">
               <button id="logout-button" class="button is-danger">Cerrar sesión</button>
             </div>
@@ -50,7 +50,7 @@ class Header extends HTMLElement {
     }
 
     logoutButton.addEventListener('click', () => {
-      window.location.href = './src/pages/login/login.html';
+      window.location.href = '../../../pages/login/login.html';
     });
   }
 }
