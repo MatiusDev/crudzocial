@@ -3,6 +3,7 @@ import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.
 
 function getBasePath() {
   const path = window.location.pathname.split('/');
+  console.log(path);
   if (path.length > 1 && path[1] === 'crudzocial') {
     return '/crudzocial';
   }
