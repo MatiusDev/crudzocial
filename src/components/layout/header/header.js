@@ -2,11 +2,13 @@ import headerStyles from './header.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
 function getBasePath() {
-  const path = window.location.pathname.split('/');
-  console.log(path);
-  if (path.length > 1 && path[1] === 'crudzocial') {
-    return '/crudzocial';
+  const isGitHubPages = window.location.hostname.endsWith('github.io');
+
+  if (isGitHubPages) {
+    const repoName = window.location.pathname.split('/')[1];
+    return repoName ? `/${repoName}` : '';
   }
+  
   return '';
 }
 
