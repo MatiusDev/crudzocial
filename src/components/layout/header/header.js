@@ -1,19 +1,27 @@
 import headerStyles from './header.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
+function getBasePath() {
+  const path = window.location.pathname.split('/');
+  if (path.length > 1 && path[1] === 'crudzocial') {
+    return '/crudzocial';
+  }
+  return '';
+}
+
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
   <header>
     <nav class="navbar">
       <div class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item" href="/pages/gallery/gallery.html">Galería</a>
-          <a class="navbar-item" href="/pages/notes/notes.html">Notas</a>
-          <a class="navbar-item" href="/pages/admin/admin.html">Panel de administración</a>
+          <a class="navbar-item" href="${getBasePath()}/src/pages/gallery/gallery.html">Galería</a>
+          <a class="navbar-item" href="${getBasePath()}/src/pages/notes/notes.html">Notas</a>
+          <a class="navbar-item" href="${getBasePath()}/src/pages/admin/admin.html">Panel de administración</a>
         </div>
         <div class="navbar-end">
             <p id="user-name"></p>
-            <a class="navbar-item" href="/pages/profile/profile.html">Perfil</a>
+            <a class="navbar-item" href="${getBasePath()}/src/pages/profile/profile.html">Perfil</a>
             <div class="navbar-item">
               <button id="logout-button" class="button is-danger">Cerrar sesión</button>
             </div>
@@ -50,7 +58,7 @@ class Header extends HTMLElement {
     }
 
     logoutButton.addEventListener('click', () => {
-      window.location.href = '/pages/login/login.html';
+      window.location.href = `${getBasePath()}/src/pages/login/login.html`;
     });
   }
 }
