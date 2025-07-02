@@ -6,14 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crudzocial</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./gallery.css">
 </head>
 
 <body>
   <main-header></main-header>
-  <main style="min-height: 100vh;">
-    <h1 class="title is-1">Galería</h1>
-    <input type="file" id="myfile" name="myfile" accept="image/*"><br><br>
-    <input type="submit" value="Submit">
+  <main class="main" style="min-height: 100vh;">
+      <!-- <h1 class="title is-1">Galería</h1>
+      <input type="file" id="myfile" name="myfile" accept="image/*">
+      <input type="submit" value="Submit"> -->
+      <input class="input is-link is-rounded" type="file" id="file-input" accept="image/*" multiple>
+      <div id="gallery-display" class="gallery-display"></div>
+      <p id="message"></p>
   </main>
   <main-footer></main-footer>
   <script type="module" src="./gallery.js"></script>

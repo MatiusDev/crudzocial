@@ -1,0 +1,71 @@
+.gallery-display {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 20%);
+    gap: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+}
+
+.image-item {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #fff; */
+}
+
+.image-item img {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(255, 0, 0, 0.7);
+    border: none;
+    border-radius: 50%; /* Hace el botón redondo */
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Asegura que esté por encima de la imagen */
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#message {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+.input {
+    margin-top: 25px;
+    width: 50%;
+}
+.main {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
