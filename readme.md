@@ -1,33 +1,30 @@
-# 📝 Información General del Proyecto
+# Información General del Proyecto
 
 - **Nombre del Proyecto:** Crudzocial-CtrlAltSupr 
 - **Nombre del Equipo e Integrantes:**
-  - Juan Carlos Balcero Torres
-  - Mariana Restrepo Acevedo
+  - Juan Carlos Balcero Torres.
+  - Mariana Restrepo Acevedo.
+  - Matius Monsalve.
   - Daniel Tapias.
-  - Matius Monsalve
 - **Descripción del Sistema y Objetivo:**
   Crudzocial es una plataforma web que integra funcionalidades **CRUD** (Crear, Leer, Actualizar, Eliminar) con características **sociales**. Permite a los usuarios gestionar notas, compartir contenido, y mantener perfiles personalizados, resolviendo la necesidad de una gestión sencilla y colaborativa de información en entornos educativos o de trabajo.
 
 ---
 
-# 🛠️ Tecnologías Utilizadas
+# Tecnologías Utilizadas
 
 - **Frontend:** HTML, CSS, JavaScript (Vanilla JS)
 - **Framework de estilos:** [Bulma CSS](https://bulma.io/)
 - **Web Components:** Utilizados para crear componentes reutilizables y modulares, facilitando el mantenimiento y la escalabilidad del sistema. Más información en [MDN Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
 - **Almacenamiento en frontend:** Uso de `localStorage` y `sessionStorage` para persistencia de datos y manejo de sesiones. También se simula una base de datos con arrays en JS.
 - **Control de versiones:** Git y GitHub.
-- **Backend:** (Opcional) Si se implementa, se puede usar [JSON Server](https://github.com/typicode/json-server) para simular una API REST.
+
 
 ---
 
-# 🚀 Ejecución y Pruebas
+# Ejecución y Pruebas
 
-## Requisitos Previos
-- [Node.js](https://nodejs.org/) (opcional, para servidores locales)
-- Navegador moderno (Chrome, Firefox, Edge, etc.)
-- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) de VS Code (recomendado para desarrollo)
+
 
 ## Instalación
 ```bash
@@ -42,7 +39,7 @@ cd crudzocial
 
 ---
 
-# 📄 Descripción de Funcionalidades
+# Descripción de Funcionalidades
 
 - **Login/Logout:** Flujo de autenticación de usuarios. Permite iniciar y cerrar sesión, diferenciando entre usuarios normales y administradores.
 - **Galería:** Visualización de imágenes o publicaciones. Permite leer información y, según permisos, agregar o eliminar elementos.
@@ -52,7 +49,7 @@ cd crudzocial
 
 ---
 
-# ⚙️ Detalles Técnicos Clave
+# Detalles Técnicos Clave
 
 ## Almacenamiento
 - **localStorage:** Almacena datos persistentes como usuarios, notas y configuraciones.
@@ -76,7 +73,7 @@ cd crudzocial
 
 ---
 
-# 🎓 Aprendizajes del Equipo
+# Aprendizajes del Equipo
 
 - Retos enfrentados y soluciones implementadas durante el desarrollo.
 - Nuevos conceptos y herramientas aprendidas: Web Components, manejo de Gitflow, modularidad en JS, uso de Bulma.
@@ -84,34 +81,12 @@ cd crudzocial
 
 ---
 
-# 📌 Estado Actual del Proyecto
-
-- Estado: [Completo / En progreso / Pendiente de funcionalidades]
-- Versión: [alfa / beta / estable]
-- Errores conocidos: [Describir brevemente o dejar en blanco si no hay]
-
----
-
-# 🤝 Contribuciones
-
-¡Las contribuciones son bienvenidas!
-
-1. Haz un fork del repositorio.
-2. Crea una rama para tu funcionalidad o corrección: `git checkout -b feature/nueva-funcionalidad`.
-3. Realiza tus cambios y haz commit: `git commit -m "Descripción clara del cambio"`.
-4. Haz push a tu rama: `git push origin feature/nueva-funcionalidad`.
-5. Abre un Pull Request explicando tus cambios.
-6. Espera la revisión y feedback del equipo.
-
----
-
-# 🗂️ Estructura del Proyecto
+# Estructura del Proyecto
 
 La siguiente imagen y diagrama muestran la organización de carpetas y archivos:
 
 ```mermaid
 graph TD
-    crudzocial --> Crudzocial.pdf
     crudzocial --> .git
     crudzocial --> readme.md
     crudzocial --> index.html
