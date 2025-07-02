@@ -1,19 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crudzocial - Notas</title>
+  <title>Crudzocial - Notas Adhesivas</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="./notes.css">
 </head>
 
 <body>
   <main-header></main-header>
-  <main style="min-height: 100vh;">
-    <h1 class="title is-1">Notas</h1>
-  </main>
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-2 has-text-link">Notas Adhesivas</h1>
+      <div class="columns is-variable is-6">
+        <!-- Formulario -->
+        <div class="column is-4">
+          <div class="card">
+            <header class="card-header">
+              <p class="card-header-title">Agregar Nota</p>
+            </header>
+            <div class="card-content">
+              <div class="field">
+                <label class="label">Título</label>
+                <div class="control">
+                  <input id="note-title" class="input" type="text" placeholder="Ej. Metas">
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Contenido</label>
+                <div class="control">
+                  <textarea id="note-input" class="textarea" placeholder="Escribe tu nota..."></textarea>
+                </div>
+              </div>
+              <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                  <button id="add-note-btn" class="button is-link">Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Grid de notas -->
+        <div class="column is-8">
+          <div id="notes-list" class="notes-grid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
   <main-footer></main-footer>
+
+  <!-- Modal de confirmación de eliminación -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Confirmar eliminación</p>
+        <button class="delete" aria-label="close" id="close-modal-btn"></button>
+      </header>
+      <section class="modal-card-body">
+        ¿Estás seguro de que deseas eliminar esta nota?
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger" id="confirm-delete-btn">Eliminar</button>
+        <button class="button" id="cancel-delete-btn">Cancelar</button>
+      </footer>
+    </div>
+  </div>
   <script type="module" src="./notes.js"></script>
 </body>
 
