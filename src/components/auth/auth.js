@@ -1,14 +1,9 @@
 import authStyles from './auth.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
-import particleStyles from '../../libs/particles/particles.css' with { type: 'css' };
-
-// import '../../libs/particles/particles.min.js';
-// import '../../libs/particles/particles.js';
 
 const authTemplate = document.createElement('template');
 authTemplate.innerHTML = `
   <main class="hero is-white is-fullheight">
-    <div id="particles-js"></div>
     <div class="hero-body">
       <div class="container has-text-centered">
         <div class="column is-4 is-offset-4">
@@ -26,7 +21,7 @@ class Auth extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this.shadowRoot.adoptedStyleSheets = [bulmaStyles, particleStyles, authStyles];
+    this.shadowRoot.adoptedStyleSheets = [bulmaStyles, authStyles];
     this.shadowRoot.appendChild(authTemplate.content.cloneNode(true));
   }
 

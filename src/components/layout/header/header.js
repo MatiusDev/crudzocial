@@ -52,7 +52,7 @@ class Header extends HTMLElement {
     }
 
     logoutButton.addEventListener('click', () => {
-      window.location.href = `${getBasePath()}/src/pages/login/login.html`;
+      window.location.href = `${getBasePath()}/index.html`;
     });
   }
 }

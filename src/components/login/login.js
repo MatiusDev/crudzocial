@@ -2,6 +2,7 @@ import loginStyles from './login.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
 import { getBasePath } from '../../utils/pathResolve.js';
+import { loadUsers, saveUser } from '../../utils/users.js';
 
 const loginTemplate = document.createElement('template');
 loginTemplate.innerHTML = `
@@ -12,13 +13,13 @@ loginTemplate.innerHTML = `
         <form>
             <div class="field">
             <div class="control">
-                <input class="input is-large" type="text" placeholder="Nombre de usuario" autofocus="" name="username">
+                <input id="username" class="input is-large" type="text" placeholder="Nombre de usuario" autofocus="" name="username">
             </div>
             </div>
 
             <div class="field">
             <div class="control">
-                <input class="input is-large" type="password" placeholder="Contraseña" name="password">
+                <input id="password" class="input is-large" type="password" placeholder="Contraseña" name="password">
             </div>
             </div>
             <div class="field">
@@ -27,7 +28,7 @@ loginTemplate.innerHTML = `
                 Recuerdame
             </label>
             </div>
-        <button class="button is-block is-info is-large is-fullwidth">Entrar <i class="fa fa-sign-in"
+        <button id="btnLogin" class="button is-block is-info is-large is-fullwidth" type='button'>Entrar <i class="fa fa-sign-in"
             aria-hidden="true"></i></button>
         </form>
     </div>
@@ -47,8 +48,58 @@ class Login extends HTMLElement {
         this.shadowRoot.appendChild(loginTemplate.content.cloneNode(true))
     }
 
-    connectedCallback() {
+    validateUser(username, password) {
+        console.log(username, password);
+        if (!username || username === '' 
+            || !password || password === '') {
+                return false;
+        }
 
+        if (username.length < 3) {
+            console.log('El usuario no puede ser menor de 3 caracteres');
+            return false;
+        }
+
+        if (password.length < 4) {
+            console.log('La contraseña no puede ser menor de 4 caracteres');
+            return false;
+        }
+        return true;
+    }
+
+    connectedCallback() {
+        // Elements
+        const btnLogin = this.shadowRoot.getElementById("btnLogin");
+
+        let users = loadUsers() || {};
+
+        btnLogin.addEventListener('click', () => {
+            const usernameElement = this.shadowRoot.getElementById("username");
+            const passwordElement = this.shadowRoot.getElementById("password");
+
+            const username = usernameElement.value;
+            const password = passwordElement.value;
+
+            if (!this.validateUser(username, password)) {
+                usernameElement.value = '';
+                passwordElement.value = '';
+                usernameElement.focus();
+                return;
+            }
+
+            console.log(users[username]);
+
+            if (users[username] === undefined) {
+                console.log('Este usuario no está registrado.');
+                return;
+            }
+            
+            if (users[username].password !== password) {
+                console.log('Contraseña incorrecta');
+                return;
+            }
+            window.location.href = `${getBasePath()}/src/pages/notes/notes.html`;
+        });
     }
 }
 

@@ -1,4 +1,4 @@
-// import './libs/particles/particles.js';
+import './libs/particles/particles.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   import('./components/layout/header/header.js');
