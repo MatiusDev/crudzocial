@@ -1,16 +1,7 @@
 import headerStyles from './header.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
-function getBasePath() {
-  const isGitHubPages = window.location.hostname.endsWith('github.io');
-
-  if (isGitHubPages) {
-    const repoName = window.location.pathname.split('/')[1];
-    return repoName ? `/${repoName}` : '';
-  }
-  
-  return '';
-}
+import { getBasePath } from '../../../utils/pathResolve.js';
 
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `

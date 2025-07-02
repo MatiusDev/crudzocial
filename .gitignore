@@ -1,4 +1,5 @@
 .vscode/
+.idx/
 
 component/
 *.pdf
