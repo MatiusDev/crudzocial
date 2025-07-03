@@ -1,23 +1,25 @@
 const layoutPath = '../../components/layout';
 
-import(`${layoutPath}/header/header.js`);
-import(`${layoutPath}/footer/footer.js`);
+import { getUser, loadUsers, saveUser, saveUserSession } from "../../utils/users.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+  import(`${layoutPath}/header/header.js`);
+  import(`${layoutPath}/footer/footer.js`);
 
-  let user = JSON.parse(localStorage.getItem('sessionUser'));
+  let user = getUser();
   if (!user) {
-
-    setTimeout(() => {
-      window.location.href = '../login/login.html';
-    }, 500);
+    window.location.href = '../../../index.html';
     return;
   }
 
   const form = document.getElementById('profile-form');
   if (form) {
-    form.name.value = user.name || '';
-    form.lastname.value = user.lastname || '';
+    const nameParts = user.fullname.split(' ');
+    const name = nameParts[0];
+    const lastname = nameParts.slice(1).join(' ');
+
+    form.name.value = name || '';
+    form.lastname.value = lastname || '';
     form.email.value = user.email || '';
     form.phone.value = user.phone || '';
     form.country.value = user.country || '';
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       user = {
         ...user,
-        name: form.name.value.trim(),
+        fullname: form.name.value.trim(),
         lastname: form.lastname.value.trim(),
         email: form.email.value.trim(),
         phone: form.phone.value.trim(),
@@ -40,10 +42,10 @@ document.addEventListener('DOMContentLoaded', () => {
         postalcode: form.postalcode.value.trim()
       };
 
-      let users = JSON.parse(localStorage.getItem('usuarios')) || [];
-      users = users.map(u => u.email === user.email ? user : u);
-      localStorage.setItem('usuarios', JSON.stringify(users));
-      localStorage.setItem('sessionUser', JSON.stringify(user));
+      let users = loadUsers() || {};
+      users[user.username] = user;
+      saveUser(users);
+      saveUserSession(user);
       alert('Perfil actualizado correctamente.');
     });
   }
@@ -51,16 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) {
     logoutBtn.addEventListener('click', () => {
-      localStorage.removeItem('sessionUser');
+      sessionStorage.removeItem('user');
       window.location.href = '../login/login.html';
     });
   }
 
   const activityList = document.getElementById('activity-list');
   if (activityList) {
-
-    const allNotes = JSON.parse(localStorage.getItem('crudzocialNotes') || '[]');
-    const userNotes = allNotes.filter(n => n.email === user.email);
+    const notesObj = JSON.parse(localStorage.getItem('notes') || '{}');
+    const userNotes = notesObj[user.username] || [];
     if (userNotes.length === 0) {
       activityList.innerHTML = '<li>No hay actividad reciente.</li>';
     } else {
