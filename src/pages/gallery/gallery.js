@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const userImages = JSON.parse(savedImagesJSON);
         const loadedImages = userImages[user.username] || [];
         galleryDisplay.innerHTML = "";
-        if (!storedImageData[user.username]) {
+        if (storedImageData[user.username] === undefined) {
           storedImageData[user.username] = [];
         }
         loadedImages.forEach(image => {
