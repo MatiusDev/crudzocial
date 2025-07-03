@@ -6,18 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Crudzocial</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="./gallery.css">
 </head>
 
 <body>
   <main-header></main-header>
   <main class="main" style="min-height: 100vh;">
-      <!-- <h1 class="title is-1">Galería</h1>
-      <input type="file" id="myfile" name="myfile" accept="image/*">
-      <input type="submit" value="Submit"> -->
-      <input class="input is-link is-rounded" type="file" id="file-input" accept="image/*" multiple>
-      <div id="gallery-display" class="gallery-display"></div>
-      <p id="message"></p>
+    <h1 class="title is-1">Galería</h1>
+    <p class="subtitle is-5">Agrega tus fotos favoritas</p>
+    <!-- <input class="input is-focused is-rounded" type="file" id="file-input" accept="image/*" multiple> -->
+     <div class="file is-large is-boxed has-name">
+      <label class="file-label">
+        <input class="file-input is-focused" type="file" name="resume" id="file-input" accept="image/*" multiple/>
+        <span class="file-cta upload-box">
+          <span class="file-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </span>
+          <span class="file-label"> Subir archivo… </span>
+        </span>
+      </label>
+    </div>
+    <div id="gallery-display" class="gallery-display"></div>
+    <p id="message"></p>
   </main>
   <main-footer></main-footer>
   <script type="module" src="./gallery.js"></script>
