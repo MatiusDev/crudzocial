@@ -127,7 +127,7 @@ class Register extends HTMLElement {
 
             if (!validateUser(username, email, fullname, password)) return;
 
-            const user = { username, password, fullname, password };
+            const user = { username, email, fullname, password };
             if (users[username] !== undefined) {
                 showMessage('Este usuario ya está registrado.', 'error');
                 cleanData();
