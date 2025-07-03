@@ -12,7 +12,6 @@ headerTemplate.innerHTML = `
         <div class="navbar-start">
           <a class="navbar-item" href="${getBasePath()}/src/pages/gallery/gallery.html">Galería</a>
           <a class="navbar-item" href="${getBasePath()}/src/pages/notes/notes.html">Notas</a>
-          <a class="navbar-item" href="${getBasePath()}/src/pages/admin/admin.html">Panel de administración</a>
         </div>
         <div class="navbar-end">
             <p id="user-name"></p>

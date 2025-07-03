@@ -109,13 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const userImages = JSON.parse(savedImagesJSON);
         const loadedImages = userImages[user.username] || [];
-        console.log(loadedImages);
         galleryDisplay.innerHTML = "";
         if (!storedImageData[user.username]) {
           storedImageData[user.username] = [];
         }
         loadedImages.forEach(image => {
-          console.log(image)
           if (image.data && image.data.startsWith("data:image")) {
             appendImageToGallery(image.id, image.data, image.name || "Imagen");
             storedImageData[user.username].push(image);
