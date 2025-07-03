@@ -1,0 +1,99 @@
+body {
+  background: linear-gradient(135deg,#f5f7fa 0%,#c3cfe2 100%);
+  min-height:100vh;
+  font-family:'Segoe UI',sans-serif;
+}
+
+.notes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.sticky-note {
+  position: relative;
+  width: 200px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg,#fef68a,#f9f047);
+  border-radius: 0 0 0 20px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+  transform: rotate(calc(var(--i, 0)*1deg));
+  transition: all .3s ease;
+  cursor: move;
+}
+
+.sticky-note:nth-child(2n) { --i:1; background:linear-gradient(135deg,#a8edea,#fed6e3) }
+.sticky-note:nth-child(3n) { --i:-1; background:linear-gradient(135deg,#d299c2,#fef9d7) }
+.sticky-note:nth-child(4n) { --i:2; background:linear-gradient(135deg,#89f7fe,#66a6ff) }
+.sticky-note:nth-child(5n) { --i:-3; background:linear-gradient(135deg,#fdbb2d,#22c1c3) }
+
+.sticky-note:hover {
+  z-index: 100;
+  transform: scale(1.05) rotate(0);
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
+}
+
+.delete-btn {
+  position: absolute;
+  top: 5px; right: 5px;
+  background: #e74c3c; color: #fff;
+  border: none; border-radius: 50%;
+  width: 24px; height: 24px;
+  cursor: pointer; opacity: 0;
+  transition: opacity .2s;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sticky-note:hover .delete-btn { opacity: 1; }
+
+.note-title {
+  font-size: 0.9rem; font-weight: 600;
+  margin-bottom: 0.5rem; text-transform: uppercase;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.note-content {
+  width: 100%; height: 80px;
+  border: none; outline: none;
+  resize: none;
+  font-family: 'Comic Sans MS',cursive;
+  font-size: 0.85rem;
+  background: transparent;
+}
+
+@media(max-width:768px){
+  .sticky-note { width:150px;height:auto;}
+}
+
+/* Modal personalizado para confirmación de eliminación */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.3);
+}
+.modal.is-active {
+  display: flex;
+}
+.modal-card {
+  max-width: 350px;
+  width: 90vw;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.modal-card-head, .modal-card-foot {
+  background: #f5f7fa;
+}
+.modal-card-title {
+  color: #e74c3c;
+}
