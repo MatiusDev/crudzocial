@@ -105,14 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function loadImagesFromLocalStorage() {
     const savedImagesJSON = localStorage.getItem(localStorageKey);
+    if (storedImageData[user.username] === undefined) {
+      storedImageData[user.username] = [];
+    }
     if (savedImagesJSON) {
       try {
         const userImages = JSON.parse(savedImagesJSON);
         const loadedImages = userImages[user.username] || [];
         galleryDisplay.innerHTML = "";
-        if (storedImageData[user.username] === undefined) {
-          storedImageData[user.username] = [];
-        }
         loadedImages.forEach(image => {
           if (image.data && image.data.startsWith("data:image")) {
             appendImageToGallery(image.id, image.data, image.name || "Imagen");
