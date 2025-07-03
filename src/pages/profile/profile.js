@@ -50,14 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  const logoutBtn = document.getElementById('logout-btn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      sessionStorage.removeItem('user');
-      window.location.href = '../login/login.html';
-    });
-  }
-
   const activityList = document.getElementById('activity-list');
   if (activityList) {
     const notesObj = JSON.parse(localStorage.getItem('notes') || '{}');
