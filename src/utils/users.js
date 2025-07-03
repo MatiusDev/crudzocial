@@ -2,8 +2,7 @@ export const loadUsers = () => JSON.parse(localStorage.getItem('users'));
 export const getUser = () => JSON.parse(sessionStorage.getItem('user'));
 export const logout = () => sessionStorage.removeItem('user');
 
-export function saveUser(users, user) {
-  users[user.username] = user;
+export function saveUser(users) {
   const strUsers = JSON.stringify(users);
   localStorage.setItem("users", strUsers);
 }

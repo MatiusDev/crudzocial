@@ -2,7 +2,7 @@ import registerStyles from './register.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
 import { getBasePath } from '../../utils/pathResolve.js';
-import { loadUsers, saveUser } from '../../utils/users.js';
+import { loadUsers, saveUser, saveUserSession } from '../../utils/users.js';
 import { showMessage } from '../../utils/global/global.js';
 
 const registerTemplate = document.createElement('template');
@@ -128,13 +128,15 @@ class Register extends HTMLElement {
             if (!validateUser(username, email, fullname, password)) return;
 
             const user = { username, password, fullname, password };
-            if (users[username] !== 'undefined') {
+            if (users[username] !== undefined) {
                 showMessage('Este usuario ya está registrado.', 'error');
                 cleanData();
                 return;
             }
-            users = saveUser(users, user);
-
+            users[username] = user;
+            saveUser(users);
+            saveUserSession(user);
+            window.location.href = '../../pages/notes/notes.html';
         });
     }
 }
