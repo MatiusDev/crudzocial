@@ -106,7 +106,6 @@ function loadImagesFromLocalStorage() {
             storedImageData.push(image);
         }
       });
-      showMessage("Imágenes cargadas desde el almacenamiento local.", "success");
     } catch (e) {
       console.error("Error al parsear imágenes de localStorage:", e);
       showMessage("Error al cargar imágenes guardadas. Datos corruptos.", "error");
@@ -118,12 +117,11 @@ function loadImagesFromLocalStorage() {
 function showMessage(message, type) {
   messageDisplay.textContent = message;
   if (type === "error") {
-    messageDisplay.style.color = "red";
+    messageDisplay.style.color = "darkred";
   } else if (type === "info") {
-    messageDisplay.style.color = "blue";
+    messageDisplay.style.color = "darkcyan";
   } else if (type === "success") {
     messageDisplay.style.color = "green";
-  } else {
-    messageDisplay.style.color = "black";
   }
 }
+
