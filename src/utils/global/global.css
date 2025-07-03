@@ -1,0 +1,56 @@
+.message-box-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none; /* Permite clics a través del contenedor si no hay mensajes */
+}
+
+.message-box {
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  min-width: 250px;
+  max-width: 350px;
+  pointer-events: all; /* Hace que el mensaje individual sea clickeable */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.message-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-box.hide {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.message-box-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.message-box.success {
+  background-color: #4CAF50;
+}
+.message-box.error {
+  background-color: #f44336;
+}
+.message-box.warning {
+  background-color: #ff9800;
+}
