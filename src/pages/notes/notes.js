@@ -14,7 +14,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Array para almacenar las notas (título y contenido)
-  let notes = JSON.parse(localStorage.getItem('crudzocialNotes') || '[]');
+  const notesKey = 'notes';
+  let userNotes = loadNotes();
+
+  function loadNotes() {
+    const storedNotes = localStorage.getItem(notesKey);
+    let notes = {};
+    if (storedNotes) {
+      notes = JSON.parse(storedNotes);
+    } else {
+      notes[user.username] = [];
+    }
+    return notes;
+  }
 
   // Elementos del DOM
   const noteTitle = document.getElementById('note-title');
@@ -25,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderizar todas las notas
   function renderNotes() {
     notesList.innerHTML = '';
-    notes.forEach((note, idx) => {
+    userNotes[user.username].forEach((note, idx) => {
       const card = document.createElement('div');
       card.className = 'sticky-note';
       card.draggable = true;
@@ -46,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
       titleDiv.contentEditable = true;
       titleDiv.spellcheck = false;
       titleDiv.addEventListener('blur', () => {
-        notes[idx].title = titleDiv.textContent.trim() || 'Sin título';
+        userNotes[user.username][idx].title = titleDiv.textContent.trim() || 'Sin título';
         saveNotes();
       });
       titleDiv.addEventListener('keydown', (ev) => {
@@ -69,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       contentArea.addEventListener('blur', () => {
         contentArea.setAttribute('readonly', true);
-        notes[idx].content = contentArea.value;
+        userNotes[user.username][idx].content = contentArea.value;
         saveNotes();
       });
       contentArea.addEventListener('keydown', (ev) => {
@@ -123,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const content = card.querySelector('.note-content').value;
         newNotes.push({ title, content });
       });
-      notes = newNotes;
+      userNotes[user.username] = newNotes;
       saveNotes();
       renderNotes();
     });
@@ -144,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Guardar notas en localStorage
   function saveNotes() {
-    localStorage.setItem('crudzocialNotes', JSON.stringify(notes));
+    localStorage.setItem(notesKey, JSON.stringify(userNotes));
   }
 
   // Agregar nueva nota
@@ -152,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const title = noteTitle.value.trim() || 'Sin título';
     const content = noteInput.value.trim();
     if (content) {
-      notes.push({ title, content });
+      userNotes[user.username].push({ title, content });
       saveNotes();
       renderNotes();
       noteTitle.value = '';
@@ -185,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (confirmDeleteBtn && cancelDeleteBtn && closeModalBtn) {
     confirmDeleteBtn.onclick = () => {
       if (noteToDeleteIdx !== null) {
-        notes.splice(noteToDeleteIdx, 1);
+        userNotes[user.username].splice(noteToDeleteIdx, 1);
         saveNotes();
         renderNotes();
       }
