@@ -136,7 +136,7 @@ class Register extends HTMLElement {
             users[username] = user;
             saveUser(users);
             saveUserSession(user);
-            window.location.href = '../../pages/notes/notes.html';
+            window.location.href = '../../pages/gallery/gallery.html';
         });
     }
 }

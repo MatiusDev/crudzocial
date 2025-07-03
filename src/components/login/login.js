@@ -94,7 +94,7 @@ class Login extends HTMLElement {
             }
 
             saveUserSession(user);
-            window.location.href = `${getBasePath()}/src/pages/notes/notes.html`;
+            window.location.href = `${getBasePath()}/src/pages/gallery/gallery.html`;
         });
     }
 }
