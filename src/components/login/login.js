@@ -2,7 +2,8 @@ import loginStyles from './login.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
 import { getBasePath } from '../../utils/pathResolve.js';
-import { loadUsers, saveUser } from '../../utils/users.js';
+import { loadUsers, saveUserSession } from '../../utils/users.js';
+import { showMessage } from '../../utils/global/global.js';
 
 const loginTemplate = document.createElement('template');
 loginTemplate.innerHTML = `
@@ -12,21 +13,15 @@ loginTemplate.innerHTML = `
         </figure>
         <form>
             <div class="field">
-            <div class="control">
-                <input id="username" class="input is-large" type="text" placeholder="Nombre de usuario" autofocus="" name="username">
-            </div>
+                <div class="control">
+                    <input id="username" class="input is-large" type="text" placeholder="Nombre de usuario" autofocus="" name="username">
+                </div>
             </div>
 
             <div class="field">
-            <div class="control">
-                <input id="password" class="input is-large" type="password" placeholder="Contraseña" name="password">
-            </div>
-            </div>
-            <div class="field">
-            <label class="checkbox">
-                <input type="checkbox">
-                Recuerdame
-            </label>
+                <div class="control">
+                    <input id="password" class="input is-large" type="password" placeholder="Contraseña" name="password">
+                </div>
             </div>
         <button id="btnLogin" class="button is-block is-info is-large is-fullwidth" type='button'>Entrar <i class="fa fa-sign-in"
             aria-hidden="true"></i></button>
@@ -48,56 +43,57 @@ class Login extends HTMLElement {
         this.shadowRoot.appendChild(loginTemplate.content.cloneNode(true))
     }
 
-    validateUser(username, password) {
-        console.log(username, password);
-        if (!username || username === '' 
-            || !password || password === '') {
-                return false;
-        }
-
-        if (username.length < 3) {
-            console.log('El usuario no puede ser menor de 3 caracteres');
-            return false;
-        }
-
-        if (password.length < 4) {
-            console.log('La contraseña no puede ser menor de 4 caracteres');
-            return false;
-        }
-        return true;
-    }
-
     connectedCallback() {
         // Elements
         const btnLogin = this.shadowRoot.getElementById("btnLogin");
+        const usernameElement = this.shadowRoot.getElementById("username");
+        const passwordElement = this.shadowRoot.getElementById("password");
 
-        let users = loadUsers() || {};
+        const users = loadUsers() || {};
+
+        const cleanData = () => {
+            usernameElement.value = '';
+            passwordElement.value = '';
+            usernameElement.focus();
+        }
+
+        const validateUser = (username, password) => {
+            if (!username || username === '') {
+                showMessage("Debes ingresar un usuario.", "error");
+                usernameElement.focus();
+                return false;
+            }
+    
+            if (!password || password === '') {
+                showMessage("Debes ingresar una contraseña.", "error");
+                passwordElement.focus();
+                return false;
+            }
+            return true;
+        }
 
         btnLogin.addEventListener('click', () => {
-            const usernameElement = this.shadowRoot.getElementById("username");
-            const passwordElement = this.shadowRoot.getElementById("password");
-
             const username = usernameElement.value;
             const password = passwordElement.value;
 
-            if (!this.validateUser(username, password)) {
-                usernameElement.value = '';
-                passwordElement.value = '';
-                usernameElement.focus();
-                return;
-            }
+            if (!validateUser(username, password)) return;
 
-            console.log(users[username]);
+            const user = users[username];
 
-            if (users[username] === undefined) {
-                console.log('Este usuario no está registrado.');
+            if (user === undefined) {
+                showMessage("El usuario no ha sido registrado", "error");
+                cleanData();
                 return;
             }
             
-            if (users[username].password !== password) {
-                console.log('Contraseña incorrecta');
+            if (user.password !== password) {
+                showMessage('Contraseña incorrecta', "error");
+                passwordElement.value = '';
+                passwordElement.focus();
                 return;
             }
+
+            saveUserSession(user);
             window.location.href = `${getBasePath()}/src/pages/notes/notes.html`;
         });
     }

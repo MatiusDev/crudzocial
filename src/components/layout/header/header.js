@@ -2,6 +2,7 @@ import headerStyles from './header.css' with { type: 'css' };
 import bulmaStyles from 'https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css' with { type: 'css' };
 
 import { getBasePath } from '../../../utils/pathResolve.js';
+import { logout } from '../../../utils/users.js';
 
 const headerTemplate = document.createElement('template');
 headerTemplate.innerHTML = `
@@ -52,6 +53,7 @@ class Header extends HTMLElement {
     }
 
     logoutButton.addEventListener('click', () => {
+      logout();
       window.location.href = `${getBasePath()}/index.html`;
     });
   }
